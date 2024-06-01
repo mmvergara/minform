@@ -6,7 +6,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "tsup src/index.ts --format cjs,esm --dts --minify",
     "release": "npm run build && changeset publish",
     "lint": "tsc"
@@ -30,6 +30,7 @@
   "homepage": "https://github.com/mmvergara/minform#readme",
   "devDependencies": {
     "@changesets/cli": "^2.27.5",
+    "jest": "^29.7.0",
     "tsup": "^8.0.2",
     "typescript": "^5.4.5"
   }
