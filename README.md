@@ -3,7 +3,7 @@
 
 </p>
   <p align="center">
-    <b>2.5kb</b> Typescript Schema Validation
+    <b>1.8KB</b> Typescript Schema Validation
   </p>
 
 ---
