@@ -9,6 +9,10 @@ type DateValidation =
   | {
       check: "atLeast18";
       error?: string;
+    }
+  | {
+      check: "required";
+      error?: string;
     };
 
 class LiteDate extends LiteValidator<Date> {
@@ -19,6 +23,11 @@ class LiteDate extends LiteValidator<Date> {
 
   constructor(typeError: string = "is not a valid date") {
     super(typeError);
+  }
+
+  required(error?: string): this {
+    this.validations.unshift({ check: "required", error });
+    return this;
   }
 
   min(minDate: Date, error?: string): this {
@@ -43,8 +52,15 @@ class LiteDate extends LiteValidator<Date> {
       return errors;
     }
 
-    this.validations.forEach((validation) => {
+    let returnOnRequired = false;
+    for (const validation of this.validations) {
       switch (validation.check) {
+        case "required":
+          if (!value) {
+            errors.push(validation.error || `${propertyName} is required`);
+            returnOnRequired = true;
+          }
+          break;
         case "min":
           if (value < validation.val) {
             errors.push(
@@ -70,7 +86,8 @@ class LiteDate extends LiteValidator<Date> {
           }
           break;
       }
-    });
+      if (returnOnRequired) return errors;
+    }
 
     return errors;
   }
