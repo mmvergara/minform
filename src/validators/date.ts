@@ -45,4 +45,4 @@ class LiteDate extends LiteValidator<Date> {
 
 const liteDate = (typeError?: string) => new LiteDate(typeError);
 
-export default liteDate
+export default liteDate;

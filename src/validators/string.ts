@@ -1,7 +1,4 @@
-// LiteString.ts
-
 import LiteValidator from "../validator";
-import liteNumber from "./number";
 
 class LiteString extends LiteValidator<string> {
   private emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
@@ -44,4 +41,5 @@ class LiteString extends LiteValidator<string> {
   }
 }
 const liteString = (typeError?: string) => new LiteString(typeError);
-export default liteNumber;
+
+export default liteString;

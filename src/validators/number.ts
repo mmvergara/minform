@@ -30,4 +30,5 @@ class LiteNumber extends LiteValidator<number> {
   }
 }
 const liteNumber = (typeError?: string) => new LiteNumber(typeError);
+
 export default liteNumber;
