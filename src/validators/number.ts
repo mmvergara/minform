@@ -1,16 +1,26 @@
 import LiteValidator from "../validator";
 
-type NumberValidation = {
-  check: "min" | "max";
-  val: number;
-  error?: string;
-};
+type NumberValidation =
+  | {
+      check: "min" | "max";
+      val: number;
+      error?: string;
+    }
+  | {
+      check: "required";
+      error?: string;
+    };
 
 class LiteNumber extends LiteValidator<number> {
   private validations: NumberValidation[] = [];
 
   constructor(typeError: string = "is not a number") {
     super(typeError);
+  }
+
+  required(error?: string): this {
+    this.validations.unshift({ check: "required", error });
+    return this;
   }
 
   min(minValue: number, error?: string): this {
@@ -29,9 +39,15 @@ class LiteNumber extends LiteValidator<number> {
       errors.push(`${propertyName} ${this.typeError}`);
       return errors;
     }
-
-    this.validations.forEach((validation) => {
+    let returnOnRequired = false;
+    for (const validation of this.validations) {
       switch (validation.check) {
+        case "required":
+          if (!value) {
+            errors.push(validation.error || `${propertyName} is required`);
+            returnOnRequired = true;
+          }
+          break;
         case "min":
           if (value < validation.val) {
             errors.push(
@@ -49,7 +65,8 @@ class LiteNumber extends LiteValidator<number> {
           }
           break;
       }
-    });
+      if (returnOnRequired) return errors;
+    }
 
     return errors;
   }
