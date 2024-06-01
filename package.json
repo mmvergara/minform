@@ -1,0 +1,36 @@
+{
+  "name": "minform",
+  "version": "1.0.0 ",
+  "description": "",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "release": "npm run build && changeset publish",
+    "lint": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmvergara/minform.git"
+  },
+  "keywords": [
+    "form",
+    "form validator",
+    "lite",
+    "lightweight",
+    "simple validator"
+  ],
+  "author": "mmvergara",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mmvergara/minform/issues"
+  },
+  "homepage": "https://github.com/mmvergara/minform#readme",
+  "devDependencies": {
+    "@changesets/cli": "^2.27.5",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  }
+}
