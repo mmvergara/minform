@@ -1,14 +1,36 @@
 import LiteValidator from "../validator";
 
+type StringValidation =
+  | {
+      check: "email";
+      error?: string;
+    }
+  | {
+      check: "min" | "max";
+      val: number;
+      error?: string;
+    };
+
 class LiteString extends LiteValidator<string> {
   private emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  private validations: StringValidation[] = [];
 
   constructor(typeError: string = "is not a string") {
     super(typeError);
   }
 
   email(error?: string): this {
-    this.validations.email = { error };
+    this.validations.push({ check: "email", error });
+    return this;
+  }
+
+  min(minLength: number, error?: string): this {
+    this.validations.push({ check: "min", val: minLength, error });
+    return this;
+  }
+
+  max(maxLength: number, error?: string): this {
+    this.validations.push({ check: "max", val: maxLength, error });
     return this;
   }
 
@@ -19,23 +41,33 @@ class LiteString extends LiteValidator<string> {
       return errors;
     }
 
-    if (this.validations.max && value.length > this.validations.max.val) {
-      errors.push(
-        this.validations.max.error ||
-          `${propertyName} should be less than ${this.validations.max.val}`
-      );
-    }
-
-    if (this.validations.min && value.length < this.validations.min.val) {
-      errors.push(
-        this.validations.min.error ||
-          `${propertyName} should be greater than ${this.validations.min.val}`
-      );
-    }
-
-    if (this.validations.email && !this.emailRegex.test(value)) {
-      errors.push(this.validations.email.error || "Invalid email format");
-    }
+    this.validations.forEach((validation) => {
+      switch (validation.check) {
+        case "email":
+          if (!this.emailRegex.test(value)) {
+            errors.push(
+              validation.error || `${propertyName} is not a valid email`
+            );
+          }
+          break;
+        case "min":
+          if (value.length < validation.val) {
+            errors.push(
+              validation.error ||
+                `${propertyName} should be atleast ${validation.val} characters long`
+            );
+          }
+          break;
+        case "max":
+          if (value.length > validation.val) {
+            errors.push(
+              validation.error ||
+                `${propertyName} should be atmost ${validation.val} characters long`
+            );
+          }
+          break;
+      }
+    });
 
     return errors;
   }
