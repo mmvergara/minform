@@ -56,3 +56,5 @@ const arrayOfErrorMessages = schema.validate({
 ## Motivation
 
 There are a lot of **powerful** validation packages out there but sometimes you don't need all that power, you just need something simple and lightweight for your simple forms.
+
+But the main reason I created this package is to **learn** Github Actions, Changeset, publishing packages to NPM and other more.
