@@ -5,11 +5,6 @@ class LiteDate extends LiteValidator<Date> {
     super(typeError);
   }
 
-  date(error?: string): this {
-    this.validations.date = { error };
-    return this;
-  }
-
   validate(propertyName: string, value: Date): string[] {
     const errors: string[] = [];
     if (isNaN(value.getTime())) {
