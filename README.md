@@ -8,16 +8,16 @@
 
 ---
 
-# Table of contents
+## Table of contents
+
 - [Installation](#installation)
 - [Basic Usage](#usage)
-- [Motivation](#motivation) 
-
-
-
+- [Motivation](#motivation)
 
 ## Installation
+
 > You need to have `typescript` installed in your project
+
 ```bash
 npm install minform
 yarn add minform
@@ -25,9 +25,33 @@ pnpm add minform
 bun add minform
 ```
 
+## Basic Usage
 
+```typescript
+import mf from "minform";
 
+type User = {
+  name: string;
+  age: number;
+  email: string;
+  password: string;
+};
 
+const schema = mf.schema<User>({
+  name: mf.string().min(3).max(30),
+  age: mf.number().min(18).max(100),
+  email: mf.string().email(),
+  password: mf.string().min(8),
+});
+
+// string[]
+const arrayOfErrorMessages = schema.validate({
+  name: "John Doe",
+  email: "johndoe@gmail.com",
+  age: 25,
+  password: "12345678",
+});
+```
 
 ## Motivation
 
