@@ -1,5 +1,0 @@
----
-"minform": patch
----
-
-readme update
