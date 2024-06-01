@@ -1,5 +1,11 @@
 # minform
 
+## 1.3.0
+
+### Minor Changes
+
+- 4488e2f: Added Requred Validation
+
 ## 1.2.1
 
 ### Patch Changes
