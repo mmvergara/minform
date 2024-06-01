@@ -9,14 +9,23 @@ type StringValidation =
       check: "min" | "max";
       val: number;
       error?: string;
+    }
+  | {
+      check: "required";
+      error?: string;
     };
 
 class LiteString extends LiteValidator<string> {
-  private emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   private validations: StringValidation[] = [];
+  private emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
   constructor(typeError: string = "is not a string") {
     super(typeError);
+  }
+
+  required(error?: string): this {
+    this.validations.unshift({ check: "required", error });
+    return this;
   }
 
   email(error?: string): this {
@@ -40,9 +49,16 @@ class LiteString extends LiteValidator<string> {
       errors.push(`${propertyName} ${this.typeError}`);
       return errors;
     }
-
-    this.validations.forEach((validation) => {
+    let returnOnRequired = false;
+    for (const validation of this.validations) {
+      if (!validation) break;
       switch (validation.check) {
+        case "required":
+          if (!value) {
+            errors.push(validation.error || `${propertyName} is required`);
+            returnOnRequired = true;
+          }
+          break;
         case "email":
           if (!this.emailRegex.test(value)) {
             errors.push(
@@ -67,8 +83,8 @@ class LiteString extends LiteValidator<string> {
           }
           break;
       }
-    });
-
+      if (returnOnRequired) return errors;
+    }
     return errors;
   }
 }
