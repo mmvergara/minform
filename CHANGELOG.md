@@ -1,5 +1,11 @@
 # minform
 
+## 1.2.1
+
+### Patch Changes
+
+- a271c10: readme update
+
 ## 1.2.0
 
 ### Minor Changes
