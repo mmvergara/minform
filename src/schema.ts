@@ -20,4 +20,6 @@ class LiteSchema<T> {
   }
 }
 
-export default LiteSchema;
+const liteSchema = <T>(schema: Schema<T>) => new LiteSchema<T>(schema);
+
+export default liteSchema;

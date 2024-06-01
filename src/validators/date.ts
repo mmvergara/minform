@@ -43,4 +43,6 @@ class LiteDate extends LiteValidator<Date> {
   }
 }
 
-export default LiteDate;
+const liteDate = (typeError?: string) => new LiteDate(typeError);
+
+export default liteDate

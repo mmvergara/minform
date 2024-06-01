@@ -29,5 +29,5 @@ class LiteNumber extends LiteValidator<number> {
     return errors;
   }
 }
-
-export default LiteNumber;
+const liteNumber = (typeError?: string) => new LiteNumber(typeError);
+export default liteNumber;
