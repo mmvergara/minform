@@ -1,7 +1,12 @@
+## Minform
+
+[![NPM Version](https://img.shields.io/npm/v/minform?logo=npm&labelColor=cb0000&color=black)](https://www.npmjs.com/package/minform)
+![npm bundle size](https://img.shields.io/bundlephobia/min/minform?label=BundlePhobia&labelColor=blackn&color=gree)
+
 <p align="center">
   <img src="package-logo.png" width="200px" align="center" />
-
 </p>
+
   <p align="center">
     <b>2.2KB </b> Typescript Schema Validation - Zod alternative
   </p>
