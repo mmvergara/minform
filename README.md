@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="package-logo.png" width="200px" align="center" alt="Zod logo" />
+  <img src="package-logo.png" width="200px" align="center" />
 
 </p>
   <p align="center">
