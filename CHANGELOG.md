@@ -1,5 +1,11 @@
 # minform
 
+## 1.3.2
+
+### Patch Changes
+
+- f8e731d: update readme
+
 ## 1.3.1
 
 ### Patch Changes
