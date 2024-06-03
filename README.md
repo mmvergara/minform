@@ -3,7 +3,7 @@
 
 </p>
   <p align="center">
-    <b>2.2KB</b> Typescript Schema Validation
+    <b>2.2KB </b> Typescript Schema Validation - Zod alternative
   </p>
 
 ---
